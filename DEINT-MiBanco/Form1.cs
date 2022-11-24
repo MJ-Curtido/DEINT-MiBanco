@@ -97,32 +97,39 @@ namespace DEINT_MiBanco
 
         private void btnModificar_Click(object sender, EventArgs e)
         {
-            if (editarBorrar == 1)
+            if (banco.clientes.Count > 0)
             {
-                banco.clientes.Remove(cliente);
-
-                if (!anyadirCliente())
+                if (editarBorrar == 1)
                 {
-                    banco.clientes.Add(cliente);
+                    banco.clientes.Remove(cliente);
+
+                    if (!anyadirCliente())
+                    {
+                        banco.clientes.Add(cliente);
+                    }
+
+                    tbDireccion.Text = "";
+                    tbNombre.Text = "";
+                    tbDNI.Text = "";
+                    tbEdad.Text = "";
+                    tbTelefono.Text = "";
+                    tbNCuenta.Text = "";
+
+                    alternarParaModificar();
+
+                    editarBorrar = 0;
                 }
+                else
+                {
+                    Form2 form = new Form2(banco, 1);
+                    form.ShowDialog();
 
-                tbDireccion.Text = "";
-                tbNombre.Text = "";
-                tbDNI.Text = "";
-                tbEdad.Text = "";
-                tbTelefono.Text = "";
-                tbNCuenta.Text = "";
-
-                alternarParaModificar();
-
-                editarBorrar = 0;
+                    cambiarTb();
+                }
             }
             else
             {
-                Form2 form = new Form2(banco, 1);
-                form.ShowDialog();
-
-                cambiarTb();
+                MessageBox.Show("No hay clientes en el banco :(");
             }
         }
 
@@ -156,7 +163,7 @@ namespace DEINT_MiBanco
 
         private void tbDireccion_Validating(object sender, CancelEventArgs e)
         {
-            if (!Regex.IsMatch(tbDireccion.Text, @"^\w+$"))
+            if (!Regex.IsMatch(tbDireccion.Text, @"^[\w\s]+$"))
             {
                 this.errores.SetError(this.tbDireccion, "Dirección incorrecta.");
                 e.Cancel = true;
@@ -227,7 +234,14 @@ namespace DEINT_MiBanco
                 if (!banco.clientes.Contains(c))
                 {
                     banco.clientes.Add(c);
-                    MessageBox.Show("Se ha añadido el cliente correctamente.");
+                    if (editarBorrar == 1)
+                    {
+                        MessageBox.Show("Se ha modificado el cliente correctamente.");
+                    }
+                    else
+                    {
+                        MessageBox.Show("Se ha añadido el cliente correctamente.");
+                    }
                     anyadido = true;
                 }
                 else
@@ -251,6 +265,12 @@ namespace DEINT_MiBanco
 
                     this.banco = bancoSerializado;
                 }
+                /*
+                banco.clientes.Add(new Cliente("55555555M", "Miguelito", "Su casa", 3, 123456789, "12345678987456321005"));
+                banco.clientes.Add(new Cliente("88888888M", "Manulon", "Su casa", 77, 546546546, "45645645645645645645"));
+                banco.clientes.Add(new Cliente("77777777M", "Manolin", "Su casa", 20, 777777777, "77777777777777777777"));
+                banco.clientes.Add(new Cliente("11111111M", "Martuki", "Su casa", 50, 123456789, "11111111111111111111"));
+                */
             }
             catch (Exception)
             {
@@ -272,26 +292,41 @@ namespace DEINT_MiBanco
 
         private void btnEliminar_Click(object sender, EventArgs e)
         {
-            if (editarBorrar == 2)
+            if (banco.clientes.Count > 0)
             {
-                banco.clientes.Remove(cliente);
+                if (editarBorrar == 2)
+                {
+                    banco.clientes.Remove(cliente);
 
-                tbDireccion.Text = "";
-                tbNombre.Text = "";
-                tbDNI.Text = "";
-                tbEdad.Text = "";
-                tbTelefono.Text = "";
-                tbNCuenta.Text = "";
+                    tbDireccion.Text = "";
+                    tbNombre.Text = "";
+                    tbDNI.Text = "";
+                    tbEdad.Text = "";
+                    tbTelefono.Text = "";
+                    tbNCuenta.Text = "";
 
-                alternarParaModificar();
+                    alternarParaEliminar();
 
-                editarBorrar = 0;
+                    editarBorrar = 0;
+                }
+                else
+                {
+                    Form2 form = new Form2(banco, 2);
+                    form.ShowDialog();
+
+                    cambiarTb();
+                }
             }
             else
             {
-                Form2 form = new Form2(banco, 2);
-                form.ShowDialog();
+                MessageBox.Show("No hay clientes en el banco :(");
             }
+        }
+
+        private void btnMostrar_Click(object sender, EventArgs e)
+        {
+            Form3 form = new Form3(banco);
+            form.ShowDialog();
         }
     }
 }

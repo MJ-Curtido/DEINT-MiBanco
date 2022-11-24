@@ -200,6 +200,7 @@
             this.btnMostrar.TabIndex = 16;
             this.btnMostrar.Text = "Mostrar datos del cliente";
             this.btnMostrar.UseVisualStyleBackColor = true;
+            this.btnMostrar.Click += new System.EventHandler(this.btnMostrar_Click);
             // 
             // errores
             // 
