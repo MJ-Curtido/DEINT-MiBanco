@@ -6,7 +6,8 @@ using System.Threading.Tasks;
 
 namespace DEINT_MiBanco
 {
-    internal class Banco
+    [Serializable]
+    public class Banco
     {
         public List<Cliente> clientes { get; set; }
 

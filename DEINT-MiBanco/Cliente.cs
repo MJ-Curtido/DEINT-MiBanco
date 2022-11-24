@@ -6,14 +6,14 @@ using System.Threading.Tasks;
 
 namespace DEINT_MiBanco
 {
-    internal class Cliente
+    public class Cliente
     {
         public String dni { get; set; }
         public String nombre { get; set; }
         public String direccion { get; set; }
         public int edad { get; set; }
         public int telefono { get; set; }
-        public int numCuenta { get; set; }
+        public String numCuenta { get; set; }
 
         public Cliente()
         {
@@ -25,7 +25,7 @@ namespace DEINT_MiBanco
             this.numCuenta = default;
         }
 
-        public Cliente(String dni, String nombre, String direccion, int edad, int telefono, int numCuenta)
+        public Cliente(String dni, String nombre, String direccion, int edad, int telefono, String numCuenta)
         {
             this.dni = dni;
             this.nombre = nombre;
@@ -33,6 +33,17 @@ namespace DEINT_MiBanco
             this.edad = edad;
             this.telefono = telefono;
             this.numCuenta = numCuenta;
+        }
+
+        public override bool Equals(object obj)
+        {
+            return obj is Cliente cliente &&
+                   dni == cliente.dni;
+        }
+
+        public override int GetHashCode()
+        {
+            return 1456690394 + EqualityComparer<string>.Default.GetHashCode(dni);
         }
     }
 }

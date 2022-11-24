@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             this.label1 = new System.Windows.Forms.Label();
             this.lblNombre = new System.Windows.Forms.Label();
             this.tbNombre = new System.Windows.Forms.TextBox();
@@ -45,6 +46,8 @@
             this.btnEliminar = new System.Windows.Forms.Button();
             this.btnModificar = new System.Windows.Forms.Button();
             this.btnMostrar = new System.Windows.Forms.Button();
+            this.errores = new System.Windows.Forms.ErrorProvider(this.components);
+            ((System.ComponentModel.ISupportInitialize)(this.errores)).BeginInit();
             this.SuspendLayout();
             // 
             // label1
@@ -72,6 +75,7 @@
             this.tbNombre.Name = "tbNombre";
             this.tbNombre.Size = new System.Drawing.Size(150, 20);
             this.tbNombre.TabIndex = 2;
+            this.tbNombre.Validating += new System.ComponentModel.CancelEventHandler(this.tbNombre_Validating);
             // 
             // tbDireccion
             // 
@@ -79,6 +83,7 @@
             this.tbDireccion.Name = "tbDireccion";
             this.tbDireccion.Size = new System.Drawing.Size(150, 20);
             this.tbDireccion.TabIndex = 4;
+            this.tbDireccion.Validating += new System.ComponentModel.CancelEventHandler(this.tbDireccion_Validating);
             // 
             // lblEdad
             // 
@@ -95,6 +100,7 @@
             this.tbDNI.Name = "tbDNI";
             this.tbDNI.Size = new System.Drawing.Size(150, 20);
             this.tbDNI.TabIndex = 8;
+            this.tbDNI.Validating += new System.ComponentModel.CancelEventHandler(this.tbDNI_Validating);
             // 
             // lblDNI
             // 
@@ -111,6 +117,7 @@
             this.tbEdad.Name = "tbEdad";
             this.tbEdad.Size = new System.Drawing.Size(150, 20);
             this.tbEdad.TabIndex = 6;
+            this.tbEdad.Validating += new System.ComponentModel.CancelEventHandler(this.tbEdad_Validating);
             // 
             // lblDireccion
             // 
@@ -127,6 +134,7 @@
             this.tbNCuenta.Name = "tbNCuenta";
             this.tbNCuenta.Size = new System.Drawing.Size(150, 20);
             this.tbNCuenta.TabIndex = 12;
+            this.tbNCuenta.Validating += new System.ComponentModel.CancelEventHandler(this.tbNCuenta_Validating);
             // 
             // lblTelefono
             // 
@@ -143,6 +151,7 @@
             this.tbTelefono.Name = "tbTelefono";
             this.tbTelefono.Size = new System.Drawing.Size(150, 20);
             this.tbTelefono.TabIndex = 10;
+            this.tbTelefono.Validating += new System.ComponentModel.CancelEventHandler(this.tbTelefono_Validating);
             // 
             // lblNCuenta
             // 
@@ -161,6 +170,7 @@
             this.btnAnyadir.TabIndex = 13;
             this.btnAnyadir.Text = "Añadir cliente";
             this.btnAnyadir.UseVisualStyleBackColor = true;
+            this.btnAnyadir.Click += new System.EventHandler(this.btnAnyadir_Click);
             // 
             // btnEliminar
             // 
@@ -170,6 +180,7 @@
             this.btnEliminar.TabIndex = 14;
             this.btnEliminar.Text = "Eliminar cliente";
             this.btnEliminar.UseVisualStyleBackColor = true;
+            this.btnEliminar.Click += new System.EventHandler(this.btnEliminar_Click);
             // 
             // btnModificar
             // 
@@ -189,6 +200,10 @@
             this.btnMostrar.TabIndex = 16;
             this.btnMostrar.Text = "Mostrar datos del cliente";
             this.btnMostrar.UseVisualStyleBackColor = true;
+            // 
+            // errores
+            // 
+            this.errores.ContainerControl = this;
             // 
             // Form1
             // 
@@ -214,6 +229,9 @@
             this.Controls.Add(this.label1);
             this.Name = "Form1";
             this.Text = "Form1";
+            this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.Form1_FormClosed);
+            this.Load += new System.EventHandler(this.Form1_Load);
+            ((System.ComponentModel.ISupportInitialize)(this.errores)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -238,6 +256,7 @@
         private System.Windows.Forms.Button btnEliminar;
         private System.Windows.Forms.Button btnModificar;
         private System.Windows.Forms.Button btnMostrar;
+        private System.Windows.Forms.ErrorProvider errores;
     }
 }
 
